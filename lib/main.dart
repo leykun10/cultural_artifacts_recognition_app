@@ -1,3 +1,4 @@
+import 'package:cultural_artifacts_recognition/presentation/home_page/home_page.dart';
 import 'package:flutter/material.dart';
 import 'presentation/on_boarding_ui/onboarding_screen.dart';
 
@@ -10,6 +11,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(theme: ThemeData(), home: OnBoardingScreen());
+    return MaterialApp(theme: ThemeData(), home: HomePage());
   }
 }
