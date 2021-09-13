@@ -20,6 +20,10 @@ class _$MlFailureTearOff {
     return const LoadingFailed();
   }
 
+  ClosingFailed failedToClose() {
+    return const ClosingFailed();
+  }
+
   PredictionFailed failedToPredict() {
     return const PredictionFailed();
   }
@@ -33,12 +37,14 @@ mixin _$MlFailure {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() failedToLoad,
+    required TResult Function() failedToClose,
     required TResult Function() failedToPredict,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? failedToLoad,
+    TResult Function()? failedToClose,
     TResult Function()? failedToPredict,
     required TResult orElse(),
   }) =>
@@ -46,12 +52,14 @@ mixin _$MlFailure {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(LoadingFailed value) failedToLoad,
+    required TResult Function(ClosingFailed value) failedToClose,
     required TResult Function(PredictionFailed value) failedToPredict,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LoadingFailed value)? failedToLoad,
+    TResult Function(ClosingFailed value)? failedToClose,
     TResult Function(PredictionFailed value)? failedToPredict,
     required TResult orElse(),
   }) =>
@@ -113,6 +121,7 @@ class _$LoadingFailed implements LoadingFailed {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() failedToLoad,
+    required TResult Function() failedToClose,
     required TResult Function() failedToPredict,
   }) {
     return failedToLoad();
@@ -122,6 +131,7 @@ class _$LoadingFailed implements LoadingFailed {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? failedToLoad,
+    TResult Function()? failedToClose,
     TResult Function()? failedToPredict,
     required TResult orElse(),
   }) {
@@ -135,6 +145,7 @@ class _$LoadingFailed implements LoadingFailed {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(LoadingFailed value) failedToLoad,
+    required TResult Function(ClosingFailed value) failedToClose,
     required TResult Function(PredictionFailed value) failedToPredict,
   }) {
     return failedToLoad(this);
@@ -144,6 +155,7 @@ class _$LoadingFailed implements LoadingFailed {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LoadingFailed value)? failedToLoad,
+    TResult Function(ClosingFailed value)? failedToClose,
     TResult Function(PredictionFailed value)? failedToPredict,
     required TResult orElse(),
   }) {
@@ -156,6 +168,95 @@ class _$LoadingFailed implements LoadingFailed {
 
 abstract class LoadingFailed implements MlFailure {
   const factory LoadingFailed() = _$LoadingFailed;
+}
+
+/// @nodoc
+abstract class $ClosingFailedCopyWith<$Res> {
+  factory $ClosingFailedCopyWith(
+          ClosingFailed value, $Res Function(ClosingFailed) then) =
+      _$ClosingFailedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$ClosingFailedCopyWithImpl<$Res> extends _$MlFailureCopyWithImpl<$Res>
+    implements $ClosingFailedCopyWith<$Res> {
+  _$ClosingFailedCopyWithImpl(
+      ClosingFailed _value, $Res Function(ClosingFailed) _then)
+      : super(_value, (v) => _then(v as ClosingFailed));
+
+  @override
+  ClosingFailed get _value => super._value as ClosingFailed;
+}
+
+/// @nodoc
+
+class _$ClosingFailed implements ClosingFailed {
+  const _$ClosingFailed();
+
+  @override
+  String toString() {
+    return 'MlFailure.failedToClose()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is ClosingFailed);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() failedToLoad,
+    required TResult Function() failedToClose,
+    required TResult Function() failedToPredict,
+  }) {
+    return failedToClose();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? failedToLoad,
+    TResult Function()? failedToClose,
+    TResult Function()? failedToPredict,
+    required TResult orElse(),
+  }) {
+    if (failedToClose != null) {
+      return failedToClose();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(LoadingFailed value) failedToLoad,
+    required TResult Function(ClosingFailed value) failedToClose,
+    required TResult Function(PredictionFailed value) failedToPredict,
+  }) {
+    return failedToClose(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(LoadingFailed value)? failedToLoad,
+    TResult Function(ClosingFailed value)? failedToClose,
+    TResult Function(PredictionFailed value)? failedToPredict,
+    required TResult orElse(),
+  }) {
+    if (failedToClose != null) {
+      return failedToClose(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ClosingFailed implements MlFailure {
+  const factory ClosingFailed() = _$ClosingFailed;
 }
 
 /// @nodoc
@@ -198,6 +299,7 @@ class _$PredictionFailed implements PredictionFailed {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() failedToLoad,
+    required TResult Function() failedToClose,
     required TResult Function() failedToPredict,
   }) {
     return failedToPredict();
@@ -207,6 +309,7 @@ class _$PredictionFailed implements PredictionFailed {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? failedToLoad,
+    TResult Function()? failedToClose,
     TResult Function()? failedToPredict,
     required TResult orElse(),
   }) {
@@ -220,6 +323,7 @@ class _$PredictionFailed implements PredictionFailed {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(LoadingFailed value) failedToLoad,
+    required TResult Function(ClosingFailed value) failedToClose,
     required TResult Function(PredictionFailed value) failedToPredict,
   }) {
     return failedToPredict(this);
@@ -229,6 +333,7 @@ class _$PredictionFailed implements PredictionFailed {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LoadingFailed value)? failedToLoad,
+    TResult Function(ClosingFailed value)? failedToClose,
     TResult Function(PredictionFailed value)? failedToPredict,
     required TResult orElse(),
   }) {
