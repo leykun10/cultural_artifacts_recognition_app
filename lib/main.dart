@@ -173,10 +173,17 @@ class _CameraScreenState extends State<CameraScreen> {
                                 ImageProperties properties = await FlutterNativeImage.getImageProperties(xFile.path);
                                 File compressedFile = await FlutterNativeImage.compressImage(xFile.path, quality: 80,
                                     targetWidth: 640, targetHeight: 320);
-                                await  MlApiFacade().postImage(File(xFile.path));
-
                                 cxt.read<MlBloc>().add(MlEvents.detectObject(File(xFile.path)));
-                                TfliteML().initializeInterpreter(compressedFile);
+                                try{
+                                  await  MlApiFacade().postImage(File(xFile.path));
+                                }
+                                catch(e){
+                                  print(e);
+                                }
+
+
+
+                                // TfliteML().initializeInterpreter(compressedFile);
                                 // setState(() {
                                 //   capturedImage!.add(File(xFile.path));
                                 // });
@@ -214,8 +221,6 @@ class _CameraScreenState extends State<CameraScreen> {
                                 ),
                               ),
                             ),
-
-
                           ],),),
                       )
                     ],

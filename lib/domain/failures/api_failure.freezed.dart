@@ -19,10 +19,6 @@ class _$ApiFailureTearOff {
   PostFailure postFailure() {
     return const PostFailure();
   }
-
-  GetFailure getFailure() {
-    return const GetFailure();
-  }
 }
 
 /// @nodoc
@@ -33,26 +29,22 @@ mixin _$ApiFailure {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() postFailure,
-    required TResult Function() getFailure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? postFailure,
-    TResult Function()? getFailure,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(PostFailure value) postFailure,
-    required TResult Function(GetFailure value) getFailure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(PostFailure value)? postFailure,
-    TResult Function(GetFailure value)? getFailure,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -114,7 +106,6 @@ class _$PostFailure implements PostFailure {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() postFailure,
-    required TResult Function() getFailure,
   }) {
     return postFailure();
   }
@@ -123,7 +114,6 @@ class _$PostFailure implements PostFailure {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? postFailure,
-    TResult Function()? getFailure,
     required TResult orElse(),
   }) {
     if (postFailure != null) {
@@ -136,7 +126,6 @@ class _$PostFailure implements PostFailure {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(PostFailure value) postFailure,
-    required TResult Function(GetFailure value) getFailure,
   }) {
     return postFailure(this);
   }
@@ -145,7 +134,6 @@ class _$PostFailure implements PostFailure {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(PostFailure value)? postFailure,
-    TResult Function(GetFailure value)? getFailure,
     required TResult orElse(),
   }) {
     if (postFailure != null) {
@@ -157,88 +145,4 @@ class _$PostFailure implements PostFailure {
 
 abstract class PostFailure implements ApiFailure {
   const factory PostFailure() = _$PostFailure;
-}
-
-/// @nodoc
-abstract class $GetFailureCopyWith<$Res> {
-  factory $GetFailureCopyWith(
-          GetFailure value, $Res Function(GetFailure) then) =
-      _$GetFailureCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class _$GetFailureCopyWithImpl<$Res> extends _$ApiFailureCopyWithImpl<$Res>
-    implements $GetFailureCopyWith<$Res> {
-  _$GetFailureCopyWithImpl(GetFailure _value, $Res Function(GetFailure) _then)
-      : super(_value, (v) => _then(v as GetFailure));
-
-  @override
-  GetFailure get _value => super._value as GetFailure;
-}
-
-/// @nodoc
-
-class _$GetFailure implements GetFailure {
-  const _$GetFailure();
-
-  @override
-  String toString() {
-    return 'ApiFailure.getFailure()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) || (other is GetFailure);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() postFailure,
-    required TResult Function() getFailure,
-  }) {
-    return getFailure();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? postFailure,
-    TResult Function()? getFailure,
-    required TResult orElse(),
-  }) {
-    if (getFailure != null) {
-      return getFailure();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(PostFailure value) postFailure,
-    required TResult Function(GetFailure value) getFailure,
-  }) {
-    return getFailure(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(PostFailure value)? postFailure,
-    TResult Function(GetFailure value)? getFailure,
-    required TResult orElse(),
-  }) {
-    if (getFailure != null) {
-      return getFailure(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class GetFailure implements ApiFailure {
-  const factory GetFailure() = _$GetFailure;
 }

@@ -5,8 +5,9 @@ import 'package:dartz/dartz.dart';
 import 'dart:io';
 import 'package:dio/dio.dart';
 class MlApiFacade implements ApiFacade{
+
   final dio = Dio();
-  final url="19";
+  final url="https://92ad7fac37dd43.localhost.run/detectobject";
 
 
   @override
@@ -16,20 +17,30 @@ class MlApiFacade implements ApiFacade{
       "file": await MultipartFile.fromFile(
         image.path,
         filename: fileName,
+
       ),
     });
 
 try {
-  var response = await dio.post(url, data: data, options: Options(
+  // var response = await Dio().get('http://www.google.com');
+  // print(response);
+  var response = await dio.post(url,data: data,  options: Options(
       method: 'POST',
-      responseType: ResponseType.stream // or ResponseType.JSON
+      // responseType: ResponseType.stream // or ResponseType.JSON
   ));
+
+  // var response2 = await dio.post(url, data: data, options: Options(
+  //     method: 'POST',
+  //     responseType: ResponseType.stream // or ResponseType.JSON
+  // ));
   print(response);
   return right(Artifact("name", "", ""));
 }
 
 
 catch(error){
+  print(error);
+
   return left(ApiFailure.postFailure());
 
 }

@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:math';
+import 'package:cultural_artifacts_recognition/infrastructure/ml_api_facade.dart';
 import 'package:image/image.dart';
 import 'package:dartz/dartz.dart';
 import 'package:tflite/tflite.dart';
@@ -36,20 +37,22 @@ class TfliteML implements MlFacade {
   @override
   Future<Either<MlFailure, List<Artifact>>> runModel(File image) async{
     try {
-     var recogntions = await Tflite.detectObjectOnImage(
-          path:image.path,
-          model: "YOLO",
-          imageMean: 0.0,
-          imageStd: 255.0,
-          threshold: 0.3,       // defaults to 0.1
-          numResultsPerClass: 2,// defaults to 5
-              // defaults to [0.57273,0.677385,1.87446,2.06253,3.33843,5.47434,7.88282,3.52778,9.77052,9.16828]
-          blockSize: 32,      // defaults to 32
-          numBoxesPerBlock: 5,  // defaults to 5
-          asynch: true
-      );
-     print(recogntions![0]);
-     devlog.log("message",error: recogntions,name:'MyLog');
+      // var result = await  MlApiFacade().postImage(image);
+     // var recogntions = await Tflite.detectObjectOnImage(
+     //      path:image.path,
+     //      model: "YOLO",
+     //      imageMean: 0.0,
+     //      imageStd: 255.0,
+     //      threshold: 0.3,       // defaults to 0.1
+     //      numResultsPerClass: 2,// defaults to 5
+     //          // defaults to [0.57273,0.677385,1.87446,2.06253,3.33843,5.47434,7.88282,3.52778,9.77052,9.16828]
+     //      blockSize: 32,      // defaults to 32
+     //      numBoxesPerBlock: 5,  // defaults to 5
+     //      asynch: true
+     //  );
+     // print(recogntions![0]);
+     // devlog.log("message",error: recogntions,name:'MyLog');
+     // print(result);
      return right([Artifact("name", "description", "imagePath")]);
     }
     catch(error) {
