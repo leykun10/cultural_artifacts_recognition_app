@@ -1,4 +1,4 @@
-import 'package:cultural_artifacts_recognition/domain/api_facade.dart';
+import 'package:cultural_artifacts_recognition/domain/facade_interfaces/api_facade.dart';
 import 'package:cultural_artifacts_recognition/domain/entities/artifacts.dart';
 import 'package:cultural_artifacts_recognition/domain/failures/api_failure.dart';
 import 'package:dartz/dartz.dart';
@@ -7,7 +7,7 @@ import 'package:dio/dio.dart';
 class MlApiFacade implements ApiFacade{
 
   final dio = Dio();
-  final url="https://92ad7fac37dd43.localhost.run/detectobject";
+  final url="http://4276-197-156-107-181.ngrok.io/detectobject";
 
 
   @override
@@ -17,7 +17,6 @@ class MlApiFacade implements ApiFacade{
       "file": await MultipartFile.fromFile(
         image.path,
         filename: fileName,
-
       ),
     });
 
@@ -29,20 +28,10 @@ try {
       // responseType: ResponseType.stream // or ResponseType.JSON
   ));
 
-  // var response2 = await dio.post(url, data: data, options: Options(
-  //     method: 'POST',
-  //     responseType: ResponseType.stream // or ResponseType.JSON
-  // ));
-  print(response);
-  return right(Artifact("name", "", ""));
+  return right(Artifact(response.data["1"]["label"], "", ""));
 }
-
-
 catch(error){
-  print(error);
-
   return left(ApiFailure.postFailure());
-
 }
   }
 }

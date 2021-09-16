@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'dart:math';
-import 'package:cultural_artifacts_recognition/infrastructure/ml_api_facade.dart';
+import 'package:cultural_artifacts_recognition/infrastructure/remote_api_facade/ml_api_facade.dart';
 import 'package:image/image.dart';
 import 'package:dartz/dartz.dart';
 import 'package:tflite/tflite.dart';
@@ -8,7 +8,7 @@ import 'package:tflite_flutter_helper/tflite_flutter_helper.dart';
 import 'package:tflite_flutter/tflite_flutter.dart';
 import 'dart:io';
 import 'dart:developer' as devlog;
-import '../domain/ml_facade.dart';
+import '../../domain/facade_interfaces/ml_facade.dart';
 
 
 import 'package:cultural_artifacts_recognition/domain/entities/artifacts.dart';

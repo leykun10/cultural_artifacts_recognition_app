@@ -2,7 +2,7 @@ import 'package:cultural_artifacts_recognition/domain/failures/image_failure.dar
 
 import 'package:dartz/dartz.dart';
 
-import '../domain/image_loader_facade.dart';
+import '../../domain/facade_interfaces/image_loader_facade.dart';
 
 class CameraImageLoaderFacade implements ImageLoaderFacade{
   @override

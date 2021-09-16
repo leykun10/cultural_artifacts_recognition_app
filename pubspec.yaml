@@ -39,6 +39,9 @@ dependencies:
   tflite_flutter: ^0.9.0
   tflite_flutter_helper:
   dio: ^4.0.0
+  flutter_progress_hud: ^2.0.0
+  another_flushbar: ^1.10.24
+
   
 
 
@@ -67,6 +70,7 @@ flutter:
   assets:
      - assets/tflite/yolo/model.tflite
      - assets/tflite/yolo/label.txt
+     - assets/images/croppedImage.jpg
      - assets/tflite/yolo/yolov2_tiny.tflite
      - assets/lite-model_yolo-v5-tflite_tflite_model_1.tflite
      - assets/tflite/yolov4-416-fp32.tflite

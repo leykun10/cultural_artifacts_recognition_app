@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:dartz/dartz.dart';
-import '../domain/entities/artifacts.dart';
-import '../domain/failures/ml_failure.dart';
+import '../entities/artifacts.dart';
+import '../failures/ml_failure.dart';
 
 
 abstract class MlFacade {

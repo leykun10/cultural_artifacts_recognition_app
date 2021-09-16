@@ -207,18 +207,18 @@ class _$ApiStateTearOff {
     return const Initial();
   }
 
-  SendingImage sendingImage(File image) {
-    return SendingImage(
-      image,
-    );
+  SendingImage sendingImage() {
+    return const SendingImage();
   }
 
   SendingImageFailed sendingImageFailed() {
     return const SendingImageFailed();
   }
 
-  ReceivedData dataReceived() {
-    return const ReceivedData();
+  ReceivedData dataReceived(Artifact artifact) {
+    return ReceivedData(
+      artifact,
+    );
   }
 }
 
@@ -230,17 +230,17 @@ mixin _$ApiState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(File image) sendingImage,
+    required TResult Function() sendingImage,
     required TResult Function() sendingImageFailed,
-    required TResult Function() dataReceived,
+    required TResult Function(Artifact artifact) dataReceived,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(File image)? sendingImage,
+    TResult Function()? sendingImage,
     TResult Function()? sendingImageFailed,
-    TResult Function()? dataReceived,
+    TResult Function(Artifact artifact)? dataReceived,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -316,9 +316,9 @@ class _$Initial implements Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(File image) sendingImage,
+    required TResult Function() sendingImage,
     required TResult Function() sendingImageFailed,
-    required TResult Function() dataReceived,
+    required TResult Function(Artifact artifact) dataReceived,
   }) {
     return initial();
   }
@@ -327,9 +327,9 @@ class _$Initial implements Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(File image)? sendingImage,
+    TResult Function()? sendingImage,
     TResult Function()? sendingImageFailed,
-    TResult Function()? dataReceived,
+    TResult Function(Artifact artifact)? dataReceived,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -374,7 +374,6 @@ abstract class $SendingImageCopyWith<$Res> {
   factory $SendingImageCopyWith(
           SendingImage value, $Res Function(SendingImage) then) =
       _$SendingImageCopyWithImpl<$Res>;
-  $Res call({File image});
 }
 
 /// @nodoc
@@ -386,72 +385,48 @@ class _$SendingImageCopyWithImpl<$Res> extends _$ApiStateCopyWithImpl<$Res>
 
   @override
   SendingImage get _value => super._value as SendingImage;
-
-  @override
-  $Res call({
-    Object? image = freezed,
-  }) {
-    return _then(SendingImage(
-      image == freezed
-          ? _value.image
-          : image // ignore: cast_nullable_to_non_nullable
-              as File,
-    ));
-  }
 }
 
 /// @nodoc
 
 class _$SendingImage implements SendingImage {
-  const _$SendingImage(this.image);
-
-  @override
-  final File image;
+  const _$SendingImage();
 
   @override
   String toString() {
-    return 'ApiState.sendingImage(image: $image)';
+    return 'ApiState.sendingImage()';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is SendingImage &&
-            (identical(other.image, image) ||
-                const DeepCollectionEquality().equals(other.image, image)));
+    return identical(this, other) || (other is SendingImage);
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(image);
-
-  @JsonKey(ignore: true)
-  @override
-  $SendingImageCopyWith<SendingImage> get copyWith =>
-      _$SendingImageCopyWithImpl<SendingImage>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(File image) sendingImage,
+    required TResult Function() sendingImage,
     required TResult Function() sendingImageFailed,
-    required TResult Function() dataReceived,
+    required TResult Function(Artifact artifact) dataReceived,
   }) {
-    return sendingImage(image);
+    return sendingImage();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(File image)? sendingImage,
+    TResult Function()? sendingImage,
     TResult Function()? sendingImageFailed,
-    TResult Function()? dataReceived,
+    TResult Function(Artifact artifact)? dataReceived,
     required TResult orElse(),
   }) {
     if (sendingImage != null) {
-      return sendingImage(image);
+      return sendingImage();
     }
     return orElse();
   }
@@ -484,12 +459,7 @@ class _$SendingImage implements SendingImage {
 }
 
 abstract class SendingImage implements ApiState {
-  const factory SendingImage(File image) = _$SendingImage;
-
-  File get image => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $SendingImageCopyWith<SendingImage> get copyWith =>
-      throw _privateConstructorUsedError;
+  const factory SendingImage() = _$SendingImage;
 }
 
 /// @nodoc
@@ -533,9 +503,9 @@ class _$SendingImageFailed implements SendingImageFailed {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(File image) sendingImage,
+    required TResult Function() sendingImage,
     required TResult Function() sendingImageFailed,
-    required TResult Function() dataReceived,
+    required TResult Function(Artifact artifact) dataReceived,
   }) {
     return sendingImageFailed();
   }
@@ -544,9 +514,9 @@ class _$SendingImageFailed implements SendingImageFailed {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(File image)? sendingImage,
+    TResult Function()? sendingImage,
     TResult Function()? sendingImageFailed,
-    TResult Function()? dataReceived,
+    TResult Function(Artifact artifact)? dataReceived,
     required TResult orElse(),
   }) {
     if (sendingImageFailed != null) {
@@ -591,6 +561,7 @@ abstract class $ReceivedDataCopyWith<$Res> {
   factory $ReceivedDataCopyWith(
           ReceivedData value, $Res Function(ReceivedData) then) =
       _$ReceivedDataCopyWithImpl<$Res>;
+  $Res call({Artifact artifact});
 }
 
 /// @nodoc
@@ -602,48 +573,73 @@ class _$ReceivedDataCopyWithImpl<$Res> extends _$ApiStateCopyWithImpl<$Res>
 
   @override
   ReceivedData get _value => super._value as ReceivedData;
+
+  @override
+  $Res call({
+    Object? artifact = freezed,
+  }) {
+    return _then(ReceivedData(
+      artifact == freezed
+          ? _value.artifact
+          : artifact // ignore: cast_nullable_to_non_nullable
+              as Artifact,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$ReceivedData implements ReceivedData {
-  const _$ReceivedData();
+  const _$ReceivedData(this.artifact);
+
+  @override
+  final Artifact artifact;
 
   @override
   String toString() {
-    return 'ApiState.dataReceived()';
+    return 'ApiState.dataReceived(artifact: $artifact)';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is ReceivedData);
+    return identical(this, other) ||
+        (other is ReceivedData &&
+            (identical(other.artifact, artifact) ||
+                const DeepCollectionEquality()
+                    .equals(other.artifact, artifact)));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(artifact);
+
+  @JsonKey(ignore: true)
+  @override
+  $ReceivedDataCopyWith<ReceivedData> get copyWith =>
+      _$ReceivedDataCopyWithImpl<ReceivedData>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(File image) sendingImage,
+    required TResult Function() sendingImage,
     required TResult Function() sendingImageFailed,
-    required TResult Function() dataReceived,
+    required TResult Function(Artifact artifact) dataReceived,
   }) {
-    return dataReceived();
+    return dataReceived(artifact);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(File image)? sendingImage,
+    TResult Function()? sendingImage,
     TResult Function()? sendingImageFailed,
-    TResult Function()? dataReceived,
+    TResult Function(Artifact artifact)? dataReceived,
     required TResult orElse(),
   }) {
     if (dataReceived != null) {
-      return dataReceived();
+      return dataReceived(artifact);
     }
     return orElse();
   }
@@ -676,5 +672,10 @@ class _$ReceivedData implements ReceivedData {
 }
 
 abstract class ReceivedData implements ApiState {
-  const factory ReceivedData() = _$ReceivedData;
+  const factory ReceivedData(Artifact artifact) = _$ReceivedData;
+
+  Artifact get artifact => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ReceivedDataCopyWith<ReceivedData> get copyWith =>
+      throw _privateConstructorUsedError;
 }

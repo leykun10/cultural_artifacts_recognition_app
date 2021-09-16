@@ -1,5 +1,6 @@
 import 'dart:io';
-import 'package:cultural_artifacts_recognition/domain/ml_facade.dart';
+import 'package:cultural_artifacts_recognition/domain/facade_interfaces/ml_facade.dart';
+import 'package:cultural_artifacts_recognition/infrastructure/remote_api_facade/ml_api_facade.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 part 'ml_events.dart';
@@ -20,7 +21,9 @@ class MlBloc extends Bloc<MlEvents,MlStates>{
     },
               detectObject: (event) async*{
               yield MlStates.objectDetecting();
-              final result =await _mlFacade.runModel(event.image);
+
+              final result =await MlApiFacade().postImage(event.image);
+
               yield result.fold((l) => MlStates.objectDetectionFailed(), (r) =>MlStates.objectDetected(r) );
               });
   }

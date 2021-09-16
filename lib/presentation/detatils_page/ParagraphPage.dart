@@ -13,7 +13,7 @@ class _ParagraphPageState extends State<ParagraphPage> {
     return Card(
       margin: EdgeInsets.all(15),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(50),
+        borderRadius: BorderRadius.circular(30),
       ),
       elevation: 8.0,
       child: Column(children: [

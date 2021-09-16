@@ -1,14 +1,12 @@
 import 'dart:io';
+import 'package:another_flushbar/flushbar.dart';
 import 'package:camera/camera.dart';
-import 'package:cultural_artifacts_recognition/application/ml_bloc/ml_bloc.dart';
-import 'package:cultural_artifacts_recognition/domain/ml_facade.dart';
-import 'package:cultural_artifacts_recognition/infrastructure/ml_api_facade.dart';
-import 'package:cultural_artifacts_recognition/infrastructure/tflite_ml_facade.dart';
+import 'package:cultural_artifacts_recognition/application/flask_api_bloc/api_bloc.dart';
+import 'package:cultural_artifacts_recognition/infrastructure/remote_api_facade/ml_api_facade.dart';
 import 'package:cultural_artifacts_recognition/presentation/detatils_page/detail_page.dart';
-import 'package:cultural_artifacts_recognition/presentation/home_page/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_native_image/flutter_native_image.dart';
+import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized(); //Ensure plugin services are initialized
@@ -28,8 +26,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         routes:   {
           '/details': (context) => const DetailsPage()},
-        theme: ThemeData(), home: BlocProvider(
-        create: (context)=>MlBloc(TfliteML()),
+        theme: ThemeData(), home: MultiBlocProvider(
+        providers: [BlocProvider(create: (context)=>ApiBlock(MlApiFacade()))],
         child: CameraScreen(camera: camera),
 
       ));
@@ -55,7 +53,7 @@ class _CameraScreenState extends State<CameraScreen> {
     // TODO: implement initState
     super.initState();
     initializeCamera(selectedCamera);
-    context.read<MlBloc>().add(MlEvents.loadModel());
+    // context.read<MlBloc>().add(MlEvents.loadModel());
 
 
   }
@@ -74,162 +72,169 @@ class _CameraScreenState extends State<CameraScreen> {
   }
 
 
+  Widget cameraScreen(BuildContext context){
+    return Card(
+        color: Colors.grey,
+        elevation: 8.0,
+        child: CameraPreview(_cameraController));
+  }
+
   @override
   Widget build(BuildContext context) {
 
     return Scaffold(
-        appBar: AppBar(title: Text("COR"),backgroundColor: Colors.cyan,),
-        body: BlocConsumer<MlBloc,MlStates>(
-          listener: (context,state){
-          state.map(initial: (state){
-          },
-              modelLoading: (state){
-              print("model loading");
-              },
-              modelLoaded: (state){
-              print("model loaded");
-              },
-              modelLoadingFailed: (state){
-              print("model loading failed");
-              } ,
-              objectDetecting: (state){
-              print("object detecting");
-              isDetecting=true;
-              },
-              objectDetected: (state){
-                isDetecting=false;
-                final snackBar = SnackBar(content: Text("object detected"));
-                ScaffoldMessenger.of(context).showSnackBar(snackBar);
-              print("object detected \n");
-              print(state);
-              },
-              objectDetectionFailed: (state){
-               Navigator.of(context).pushNamed("/details");
-               isDetecting =false;
-                final snackBar = SnackBar(content: Text("object detection failed"));
-                ScaffoldMessenger.of(context).showSnackBar(snackBar);
-              print("object detection Failed");
-              });
-          },
-          builder:(cxt,state)=>FutureBuilder(
-              future: _initializeControllerFeature,
-              builder: (context, snapshot){
-                if (snapshot.connectionState == ConnectionState.done) {
-                  state.map(initial: (_){}, modelLoading: (_){},
-                      modelLoaded: (_){},
-                      modelLoadingFailed:(_){
-                      },
-                      objectDetecting: (_){
-                      },
-                      objectDetected: (_){
-                      },
-                      objectDetectionFailed: (_){
-                      });
-                  return isDetecting?Center(child: CircularProgressIndicator(color: Colors.blue,)):Column(
-                    children: [
-                      Expanded(child: Card(
-                          color: Colors.grey,
+        appBar: AppBar(leading: Icon(Icons.menu),
+          title: Text('COR'),
+          actions: [
+            Icon(Icons.favorite),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              child: Icon(Icons.search),
+            ),
+            Icon(Icons.more_vert),
+          ],
+          backgroundColor: Colors.cyan,),
+        body: ProgressHUD(
+          indicatorWidget: Container(
+            height: MediaQuery.of(context).size.height*0.08,
+            width: MediaQuery.of(context).size.width*0.25,
+            child: Center(child: CircularProgressIndicator()),),
+          indicatorColor: Colors.black,
+          backgroundColor: Colors.white,
+          child: BlocListener<ApiBlock,ApiState>(
+            listener: (context,state) {
+
+              state.map(initial: (_){
+
+                     },
+                  sendingImage:(_)
+                  {
+                    final progress = ProgressHUD.of(context);
+                    progress?.show();
+
+                  } ,
+                  sendingImageFailed: (_)
+                  async{
+
+                    final progress = ProgressHUD.of(context);
+                    progress?.dismiss();
+                    await Flushbar(
+                      backgroundColor: Colors.redAccent,
+                        title: 'Request Failed',
+                        message:
+                        'please try again',
+                        duration: Duration(seconds: 3),
+                    ).show(context);
+
+                  },
+                  dataReceived: (_)
+                  {
+                    final progress = ProgressHUD.of(context);
+                    progress?.dismiss();
+                    Navigator.of(context).pushNamed("/details");
+                  });
+
+            },
+            child:FutureBuilder(
+                future: _initializeControllerFeature,
+                builder: (context, snapshot){
+                  if (snapshot.connectionState == ConnectionState.done) {
+
+                    return Column(
+                      children: [
+                        Container(
+                            padding: EdgeInsets.symmetric(vertical:  10,horizontal: 0),
+                            height: MediaQuery.of(context).size.height*0.68,
+                            width: MediaQuery.of(context).size.width*0.9,
+                            child: Card(
+                            color: Colors.black54,
+                            elevation: 10.0,
+                            child: CameraPreview(_cameraController))),
+
+                        Card(
+                          color: Colors.cyan,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(50),
+                          ),
+                          margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                           elevation: 8.0,
-                          child: CameraPreview(_cameraController))),
-                      Card(
-                        color: Colors.cyan,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(50),
-                        ),
-                        margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                        elevation: 8.0,
-                        child: Container(
-                          height: MediaQuery.of(context).size.height*0.18,
+                          child: Container(
+                            height: MediaQuery.of(context).size.height*0.18,
 
 
-                          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 0),
-                          child: Row(
-                            mainAxisAlignment:MainAxisAlignment.spaceAround,
-                            children: [
-                            IconButton(
-                              onPressed: () {
-                                if (widget.camera!.length > 1) {
-                                  setState(() {
-                                    selectedCamera =
-                                    selectedCamera == 0 ? 1 : 0; //Switch camera
-                                    initializeCamera(selectedCamera);
-                                  });
-                                } else { isDetecting=true;
-                                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                    content: Text('No secondary camera found'),
-                                    duration: const Duration(seconds: 2),
-                                  ));
-                                }
-                              },
-                              icon: Icon(
-                                  Icons.switch_camera_rounded, color: Colors.white,size: 55,),
-                            ),
-                            GestureDetector(
-                              onTap: () async {
+                            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 0),
+                            child: Row(
+                              mainAxisAlignment:MainAxisAlignment.spaceAround,
+                              children: [
+                              IconButton(
+                                onPressed: () {
+                                  if (widget.camera!.length > 1) {
+                                    setState(() {
+                                      selectedCamera =
+                                      selectedCamera == 0 ? 1 : 0; //Switch camera
+                                      initializeCamera(selectedCamera);
+                                    });
+                                  } else { isDetecting=true;
+                                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                      content: Text('No secondary camera found'),
+                                      duration: const Duration(seconds: 2),
+                                    ));
+                                  }
+                                },
+                                icon: Icon(
+                                    Icons.switch_camera_rounded, color: Colors.white,size: 55,),
+                              ),
+                              GestureDetector(
+                                onTap: () async {
 
-                                await _initializeControllerFeature; //To make sure camera is initialized
-                                XFile xFile = await _cameraController.takePicture();
+                                  await _initializeControllerFeature; //To make sure camera is initialized
+                                  XFile xFile = await _cameraController.takePicture();
+                                  context.read<ApiBlock>().add(ApiEvent.sendImage(File(xFile.path)));
 
-                                ImageProperties properties = await FlutterNativeImage.getImageProperties(xFile.path);
-                                File compressedFile = await FlutterNativeImage.compressImage(xFile.path, quality: 80,
-                                    targetWidth: 640, targetHeight: 320);
-                                cxt.read<MlBloc>().add(MlEvents.detectObject(File(xFile.path)));
-                                try{
-                                  await  MlApiFacade().postImage(File(xFile.path));
-                                }
-                                catch(e){
-                                  print(e);
-                                }
+                                },
+                                child: Container(
+                                  child: Icon(Icons.camera,size: 45,),
 
+                                  height: 60,
+                                  width: 60,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    shape: BoxShape.circle,
 
-
-                                // TfliteML().initializeInterpreter(compressedFile);
-                                // setState(() {
-                                //   capturedImage!.add(File(xFile.path));
-                                // });
-                              },
-                              child: Container(
-                                child: Icon(Icons.camera,size: 45,),
-
-                                height: 60,
-                                width: 60,
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  shape: BoxShape.circle,
-
+                                  ),
                                 ),
                               ),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                if (capturedImage!.isEmpty) return; //Return if no image
-                                // Navigator.push(context,
-                                //     MaterialPageRoute(
-                                //         builder: (context) => GalleryScreen(
-                                //             images: capturedImages.reversed.toList())));
-                              },
-                              child: Container(
-                                child: Icon(Icons.image_outlined,size: 45,),
-                                height: 60,
-                                width: 60,
-                                decoration: BoxDecoration(
-                                  border: Border.all(color: Colors.white),
-                                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                                  image: capturedImage!.isNotEmpty
-                                      ? DecorationImage(image: FileImage(capturedImage!.last), fit: BoxFit.cover)
-                                      : null,
+                              GestureDetector(
+                                onTap: () {
+                                  if (capturedImage!.isEmpty) return; //Return if no image
+                                  // Navigator.push(context,
+                                  //     MaterialPageRoute(
+                                  //         builder: (context) => GalleryScreen(
+                                  //             images: capturedImages.reversed.toList())));
+                                },
+                                child: Container(
+                                  child: Icon(Icons.image_outlined,size: 45,),
+                                  height: 60,
+                                  width: 60,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.white),
+                                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                                    image: capturedImage!.isNotEmpty
+                                        ? DecorationImage(image: FileImage(capturedImage!.last), fit: BoxFit.cover)
+                                        : null,
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],),),
-                      )
-                    ],
-                  );
-                }
-                else {
-                  return CircularProgressIndicator();
-                }
-              }),
+                            ],),),
+                        )
+                      ],
+                    );
+                  }
+                  else {
+                    return Center(child: CircularProgressIndicator());
+                  }
+                }),
+          ),
         ),
 
     );
