@@ -41,6 +41,8 @@ try {
    List<Artifact> artifacts =[];
    Map<String,dynamic> data  = response.data;
    data.forEach((key, value) {
+     print(data["key"]);
+     print(data[key]["label"]);
      artifacts.add(Artifact(artifacts:true,name: data[key]["label"],description: _prefs.get(data[key]["label"]) as String,
          imagePath: image.path,coordinates: [data[key]["x1"] as int,data[key]["x2"] as int,data[key]["y1"] as int,data[key]["y2"] as int]),
      );

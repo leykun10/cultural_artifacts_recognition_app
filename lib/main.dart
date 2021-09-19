@@ -31,11 +31,13 @@ void main() async{
 
   var kebero="A kebero is a double-headed, conical hand drum used in the traditional music of Eritrea, Sudan and Ethiopia. A piece of animal hide is stretched over each end of the instrument, thus forming a membranophone. A large version of the kebero is also used in Ethiopian and Eritrean Orthodox Christian liturgical music, while smaller versions are used in secular celebrations.";
 
-  var birle ="birle";
+  var birle ="The berelé flask is still used today in Ethiopia, but peculiarly, exclusively for t’ej (ጠጅ) no other beverage. Own a piece of drinking history – the oldest style drinking vessel in current use. Available only from the Honey Wine Company.";
 
-  var sefed ="sefed";
+  var sefed ="sefed is spherical-shaped basketwork used for winnowing grain and taking out injera from the griddle.";
 
-  var chira ="chira";
+  var chira ="The ceremonial whisk has been part of the regalia of the Christian Ethiopian empire and its church for centuries. This modern example of a ceremonial whisk (čera or chira) represents a luxury model, with a thick plume of fine horsehair attached to an ornamented handle. Such works were often used by a member of the clergy or the royalty. The use of horsehair would have indicated the status of the bearer, as horses were associated with warriors, nobles, and above all, the emperor.";
+
+  var taba = "It is a locally made plate from clay, which is used for serving one of the favorite   foods for Ethiopians, kitfo. This specific taba has a design of chele on the top and bottom. The large size has the capacity to hold upto 10kg of kitfo, the medium size has the capacity to hold upto 5kg and the small size has the capacity to hold upto 3kg kitfo.";
 
 
   _prefs.setString("Mesob", mesob).then((bool success) {
@@ -51,6 +53,8 @@ void main() async{
   _prefs.setString("Sefed", sefed).then((bool success) {
   });
   _prefs.setString("Chira", chira).then((bool success) {
+  });
+  _prefs.setString("Taba", taba).then((bool success) {
   });
 
 

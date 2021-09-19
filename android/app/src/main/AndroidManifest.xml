@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.cultural_artifacts_recognition">
+    <uses-permission android:name="android.permission.INTERNET"/> <!-- Add this -->
    <application
         android:label="cultural_artifacts_recognition"
         android:icon="@mipmap/ic_launcher">
