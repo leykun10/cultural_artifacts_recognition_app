@@ -5,7 +5,7 @@ import '../failures/api_failure.dart';
 
 abstract class ApiFacade {
 
-  Future<Either<ApiFailure,Artifact>> postImage(File image);
+  Future<Either<ApiFailure,List<Artifact>>> postImage(File image);
 
 
 }

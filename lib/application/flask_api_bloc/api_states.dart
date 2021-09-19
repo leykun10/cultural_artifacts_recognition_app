@@ -10,7 +10,8 @@ abstract class ApiState with _$ApiState{
   const factory ApiState.sendingImage()= SendingImage;
   const factory ApiState.sendingImageFailed()= SendingImageFailed;
   // Todo: AuthState for failed response
-  const factory ApiState.dataReceived(Artifact artifact)= ReceivedData;
+  const factory ApiState.objectDetected(List<Artifact> artifacts)= ObjectDetected;
+  const factory ApiState.noObjectDetected() = NoObjectDetected;
 
 
 }

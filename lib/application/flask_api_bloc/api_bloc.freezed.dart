@@ -215,10 +215,14 @@ class _$ApiStateTearOff {
     return const SendingImageFailed();
   }
 
-  ReceivedData dataReceived(Artifact artifact) {
-    return ReceivedData(
-      artifact,
+  ObjectDetected objectDetected(List<Artifact> artifacts) {
+    return ObjectDetected(
+      artifacts,
     );
+  }
+
+  NoObjectDetected noObjectDetected() {
+    return const NoObjectDetected();
   }
 }
 
@@ -232,7 +236,8 @@ mixin _$ApiState {
     required TResult Function() initial,
     required TResult Function() sendingImage,
     required TResult Function() sendingImageFailed,
-    required TResult Function(Artifact artifact) dataReceived,
+    required TResult Function(List<Artifact> artifacts) objectDetected,
+    required TResult Function() noObjectDetected,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -240,7 +245,8 @@ mixin _$ApiState {
     TResult Function()? initial,
     TResult Function()? sendingImage,
     TResult Function()? sendingImageFailed,
-    TResult Function(Artifact artifact)? dataReceived,
+    TResult Function(List<Artifact> artifacts)? objectDetected,
+    TResult Function()? noObjectDetected,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -249,7 +255,8 @@ mixin _$ApiState {
     required TResult Function(Initial value) initial,
     required TResult Function(SendingImage value) sendingImage,
     required TResult Function(SendingImageFailed value) sendingImageFailed,
-    required TResult Function(ReceivedData value) dataReceived,
+    required TResult Function(ObjectDetected value) objectDetected,
+    required TResult Function(NoObjectDetected value) noObjectDetected,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -257,7 +264,8 @@ mixin _$ApiState {
     TResult Function(Initial value)? initial,
     TResult Function(SendingImage value)? sendingImage,
     TResult Function(SendingImageFailed value)? sendingImageFailed,
-    TResult Function(ReceivedData value)? dataReceived,
+    TResult Function(ObjectDetected value)? objectDetected,
+    TResult Function(NoObjectDetected value)? noObjectDetected,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -318,7 +326,8 @@ class _$Initial implements Initial {
     required TResult Function() initial,
     required TResult Function() sendingImage,
     required TResult Function() sendingImageFailed,
-    required TResult Function(Artifact artifact) dataReceived,
+    required TResult Function(List<Artifact> artifacts) objectDetected,
+    required TResult Function() noObjectDetected,
   }) {
     return initial();
   }
@@ -329,7 +338,8 @@ class _$Initial implements Initial {
     TResult Function()? initial,
     TResult Function()? sendingImage,
     TResult Function()? sendingImageFailed,
-    TResult Function(Artifact artifact)? dataReceived,
+    TResult Function(List<Artifact> artifacts)? objectDetected,
+    TResult Function()? noObjectDetected,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -344,7 +354,8 @@ class _$Initial implements Initial {
     required TResult Function(Initial value) initial,
     required TResult Function(SendingImage value) sendingImage,
     required TResult Function(SendingImageFailed value) sendingImageFailed,
-    required TResult Function(ReceivedData value) dataReceived,
+    required TResult Function(ObjectDetected value) objectDetected,
+    required TResult Function(NoObjectDetected value) noObjectDetected,
   }) {
     return initial(this);
   }
@@ -355,7 +366,8 @@ class _$Initial implements Initial {
     TResult Function(Initial value)? initial,
     TResult Function(SendingImage value)? sendingImage,
     TResult Function(SendingImageFailed value)? sendingImageFailed,
-    TResult Function(ReceivedData value)? dataReceived,
+    TResult Function(ObjectDetected value)? objectDetected,
+    TResult Function(NoObjectDetected value)? noObjectDetected,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -411,7 +423,8 @@ class _$SendingImage implements SendingImage {
     required TResult Function() initial,
     required TResult Function() sendingImage,
     required TResult Function() sendingImageFailed,
-    required TResult Function(Artifact artifact) dataReceived,
+    required TResult Function(List<Artifact> artifacts) objectDetected,
+    required TResult Function() noObjectDetected,
   }) {
     return sendingImage();
   }
@@ -422,7 +435,8 @@ class _$SendingImage implements SendingImage {
     TResult Function()? initial,
     TResult Function()? sendingImage,
     TResult Function()? sendingImageFailed,
-    TResult Function(Artifact artifact)? dataReceived,
+    TResult Function(List<Artifact> artifacts)? objectDetected,
+    TResult Function()? noObjectDetected,
     required TResult orElse(),
   }) {
     if (sendingImage != null) {
@@ -437,7 +451,8 @@ class _$SendingImage implements SendingImage {
     required TResult Function(Initial value) initial,
     required TResult Function(SendingImage value) sendingImage,
     required TResult Function(SendingImageFailed value) sendingImageFailed,
-    required TResult Function(ReceivedData value) dataReceived,
+    required TResult Function(ObjectDetected value) objectDetected,
+    required TResult Function(NoObjectDetected value) noObjectDetected,
   }) {
     return sendingImage(this);
   }
@@ -448,7 +463,8 @@ class _$SendingImage implements SendingImage {
     TResult Function(Initial value)? initial,
     TResult Function(SendingImage value)? sendingImage,
     TResult Function(SendingImageFailed value)? sendingImageFailed,
-    TResult Function(ReceivedData value)? dataReceived,
+    TResult Function(ObjectDetected value)? objectDetected,
+    TResult Function(NoObjectDetected value)? noObjectDetected,
     required TResult orElse(),
   }) {
     if (sendingImage != null) {
@@ -505,7 +521,8 @@ class _$SendingImageFailed implements SendingImageFailed {
     required TResult Function() initial,
     required TResult Function() sendingImage,
     required TResult Function() sendingImageFailed,
-    required TResult Function(Artifact artifact) dataReceived,
+    required TResult Function(List<Artifact> artifacts) objectDetected,
+    required TResult Function() noObjectDetected,
   }) {
     return sendingImageFailed();
   }
@@ -516,7 +533,8 @@ class _$SendingImageFailed implements SendingImageFailed {
     TResult Function()? initial,
     TResult Function()? sendingImage,
     TResult Function()? sendingImageFailed,
-    TResult Function(Artifact artifact)? dataReceived,
+    TResult Function(List<Artifact> artifacts)? objectDetected,
+    TResult Function()? noObjectDetected,
     required TResult orElse(),
   }) {
     if (sendingImageFailed != null) {
@@ -531,7 +549,8 @@ class _$SendingImageFailed implements SendingImageFailed {
     required TResult Function(Initial value) initial,
     required TResult Function(SendingImage value) sendingImage,
     required TResult Function(SendingImageFailed value) sendingImageFailed,
-    required TResult Function(ReceivedData value) dataReceived,
+    required TResult Function(ObjectDetected value) objectDetected,
+    required TResult Function(NoObjectDetected value) noObjectDetected,
   }) {
     return sendingImageFailed(this);
   }
@@ -542,7 +561,8 @@ class _$SendingImageFailed implements SendingImageFailed {
     TResult Function(Initial value)? initial,
     TResult Function(SendingImage value)? sendingImage,
     TResult Function(SendingImageFailed value)? sendingImageFailed,
-    TResult Function(ReceivedData value)? dataReceived,
+    TResult Function(ObjectDetected value)? objectDetected,
+    TResult Function(NoObjectDetected value)? noObjectDetected,
     required TResult orElse(),
   }) {
     if (sendingImageFailed != null) {
@@ -557,66 +577,66 @@ abstract class SendingImageFailed implements ApiState {
 }
 
 /// @nodoc
-abstract class $ReceivedDataCopyWith<$Res> {
-  factory $ReceivedDataCopyWith(
-          ReceivedData value, $Res Function(ReceivedData) then) =
-      _$ReceivedDataCopyWithImpl<$Res>;
-  $Res call({Artifact artifact});
+abstract class $ObjectDetectedCopyWith<$Res> {
+  factory $ObjectDetectedCopyWith(
+          ObjectDetected value, $Res Function(ObjectDetected) then) =
+      _$ObjectDetectedCopyWithImpl<$Res>;
+  $Res call({List<Artifact> artifacts});
 }
 
 /// @nodoc
-class _$ReceivedDataCopyWithImpl<$Res> extends _$ApiStateCopyWithImpl<$Res>
-    implements $ReceivedDataCopyWith<$Res> {
-  _$ReceivedDataCopyWithImpl(
-      ReceivedData _value, $Res Function(ReceivedData) _then)
-      : super(_value, (v) => _then(v as ReceivedData));
+class _$ObjectDetectedCopyWithImpl<$Res> extends _$ApiStateCopyWithImpl<$Res>
+    implements $ObjectDetectedCopyWith<$Res> {
+  _$ObjectDetectedCopyWithImpl(
+      ObjectDetected _value, $Res Function(ObjectDetected) _then)
+      : super(_value, (v) => _then(v as ObjectDetected));
 
   @override
-  ReceivedData get _value => super._value as ReceivedData;
+  ObjectDetected get _value => super._value as ObjectDetected;
 
   @override
   $Res call({
-    Object? artifact = freezed,
+    Object? artifacts = freezed,
   }) {
-    return _then(ReceivedData(
-      artifact == freezed
-          ? _value.artifact
-          : artifact // ignore: cast_nullable_to_non_nullable
-              as Artifact,
+    return _then(ObjectDetected(
+      artifacts == freezed
+          ? _value.artifacts
+          : artifacts // ignore: cast_nullable_to_non_nullable
+              as List<Artifact>,
     ));
   }
 }
 
 /// @nodoc
 
-class _$ReceivedData implements ReceivedData {
-  const _$ReceivedData(this.artifact);
+class _$ObjectDetected implements ObjectDetected {
+  const _$ObjectDetected(this.artifacts);
 
   @override
-  final Artifact artifact;
+  final List<Artifact> artifacts;
 
   @override
   String toString() {
-    return 'ApiState.dataReceived(artifact: $artifact)';
+    return 'ApiState.objectDetected(artifacts: $artifacts)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is ReceivedData &&
-            (identical(other.artifact, artifact) ||
+        (other is ObjectDetected &&
+            (identical(other.artifacts, artifacts) ||
                 const DeepCollectionEquality()
-                    .equals(other.artifact, artifact)));
+                    .equals(other.artifacts, artifacts)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(artifact);
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(artifacts);
 
   @JsonKey(ignore: true)
   @override
-  $ReceivedDataCopyWith<ReceivedData> get copyWith =>
-      _$ReceivedDataCopyWithImpl<ReceivedData>(this, _$identity);
+  $ObjectDetectedCopyWith<ObjectDetected> get copyWith =>
+      _$ObjectDetectedCopyWithImpl<ObjectDetected>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -624,9 +644,10 @@ class _$ReceivedData implements ReceivedData {
     required TResult Function() initial,
     required TResult Function() sendingImage,
     required TResult Function() sendingImageFailed,
-    required TResult Function(Artifact artifact) dataReceived,
+    required TResult Function(List<Artifact> artifacts) objectDetected,
+    required TResult Function() noObjectDetected,
   }) {
-    return dataReceived(artifact);
+    return objectDetected(artifacts);
   }
 
   @override
@@ -635,11 +656,12 @@ class _$ReceivedData implements ReceivedData {
     TResult Function()? initial,
     TResult Function()? sendingImage,
     TResult Function()? sendingImageFailed,
-    TResult Function(Artifact artifact)? dataReceived,
+    TResult Function(List<Artifact> artifacts)? objectDetected,
+    TResult Function()? noObjectDetected,
     required TResult orElse(),
   }) {
-    if (dataReceived != null) {
-      return dataReceived(artifact);
+    if (objectDetected != null) {
+      return objectDetected(artifacts);
     }
     return orElse();
   }
@@ -650,9 +672,10 @@ class _$ReceivedData implements ReceivedData {
     required TResult Function(Initial value) initial,
     required TResult Function(SendingImage value) sendingImage,
     required TResult Function(SendingImageFailed value) sendingImageFailed,
-    required TResult Function(ReceivedData value) dataReceived,
+    required TResult Function(ObjectDetected value) objectDetected,
+    required TResult Function(NoObjectDetected value) noObjectDetected,
   }) {
-    return dataReceived(this);
+    return objectDetected(this);
   }
 
   @override
@@ -661,21 +684,119 @@ class _$ReceivedData implements ReceivedData {
     TResult Function(Initial value)? initial,
     TResult Function(SendingImage value)? sendingImage,
     TResult Function(SendingImageFailed value)? sendingImageFailed,
-    TResult Function(ReceivedData value)? dataReceived,
+    TResult Function(ObjectDetected value)? objectDetected,
+    TResult Function(NoObjectDetected value)? noObjectDetected,
     required TResult orElse(),
   }) {
-    if (dataReceived != null) {
-      return dataReceived(this);
+    if (objectDetected != null) {
+      return objectDetected(this);
     }
     return orElse();
   }
 }
 
-abstract class ReceivedData implements ApiState {
-  const factory ReceivedData(Artifact artifact) = _$ReceivedData;
+abstract class ObjectDetected implements ApiState {
+  const factory ObjectDetected(List<Artifact> artifacts) = _$ObjectDetected;
 
-  Artifact get artifact => throw _privateConstructorUsedError;
+  List<Artifact> get artifacts => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $ReceivedDataCopyWith<ReceivedData> get copyWith =>
+  $ObjectDetectedCopyWith<ObjectDetected> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $NoObjectDetectedCopyWith<$Res> {
+  factory $NoObjectDetectedCopyWith(
+          NoObjectDetected value, $Res Function(NoObjectDetected) then) =
+      _$NoObjectDetectedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$NoObjectDetectedCopyWithImpl<$Res> extends _$ApiStateCopyWithImpl<$Res>
+    implements $NoObjectDetectedCopyWith<$Res> {
+  _$NoObjectDetectedCopyWithImpl(
+      NoObjectDetected _value, $Res Function(NoObjectDetected) _then)
+      : super(_value, (v) => _then(v as NoObjectDetected));
+
+  @override
+  NoObjectDetected get _value => super._value as NoObjectDetected;
+}
+
+/// @nodoc
+
+class _$NoObjectDetected implements NoObjectDetected {
+  const _$NoObjectDetected();
+
+  @override
+  String toString() {
+    return 'ApiState.noObjectDetected()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is NoObjectDetected);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() sendingImage,
+    required TResult Function() sendingImageFailed,
+    required TResult Function(List<Artifact> artifacts) objectDetected,
+    required TResult Function() noObjectDetected,
+  }) {
+    return noObjectDetected();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? sendingImage,
+    TResult Function()? sendingImageFailed,
+    TResult Function(List<Artifact> artifacts)? objectDetected,
+    TResult Function()? noObjectDetected,
+    required TResult orElse(),
+  }) {
+    if (noObjectDetected != null) {
+      return noObjectDetected();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Initial value) initial,
+    required TResult Function(SendingImage value) sendingImage,
+    required TResult Function(SendingImageFailed value) sendingImageFailed,
+    required TResult Function(ObjectDetected value) objectDetected,
+    required TResult Function(NoObjectDetected value) noObjectDetected,
+  }) {
+    return noObjectDetected(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Initial value)? initial,
+    TResult Function(SendingImage value)? sendingImage,
+    TResult Function(SendingImageFailed value)? sendingImageFailed,
+    TResult Function(ObjectDetected value)? objectDetected,
+    TResult Function(NoObjectDetected value)? noObjectDetected,
+    required TResult orElse(),
+  }) {
+    if (noObjectDetected != null) {
+      return noObjectDetected(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class NoObjectDetected implements ApiState {
+  const factory NoObjectDetected() = _$NoObjectDetected;
 }

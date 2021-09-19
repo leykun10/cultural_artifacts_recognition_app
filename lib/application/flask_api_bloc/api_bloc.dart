@@ -20,7 +20,11 @@ class ApiBlock extends Bloc<ApiEvent,ApiState>{
        yield ApiState.sendingImage();
        var result = await _mlApiFacade.postImage(event.image);
        yield result.fold((l) => ApiState.sendingImageFailed(),
-               (r) => ApiState.dataReceived(r));
+               (r) {
+         if(!r[0].artifacts!){
+           return ApiState.noObjectDetected();
+         }
+          return ApiState.objectDetected(r);});
        
      });
   }

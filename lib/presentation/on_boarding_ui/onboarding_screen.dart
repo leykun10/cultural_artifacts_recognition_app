@@ -6,9 +6,13 @@ class OnBoardingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return IntroductionScreen(
+      onDone: (){
+        Navigator.of(context).pushNamed("/home");
+      },
       pages: [
-        PageViewModel(title: "Welcome"),
+        PageViewModel(title: "Identify Objects on the Go"),
       ],
     );
   }

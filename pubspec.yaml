@@ -41,8 +41,9 @@ dependencies:
   dio: ^4.0.0
   flutter_progress_hud: ^2.0.0
   another_flushbar: ^1.10.24
-
-  
+  readmore: ^2.1.0
+  google_fonts: ^2.1.0
+  shared_preferences: ^2.0.8
 
 
 dev_dependencies:
@@ -67,14 +68,17 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  assets:
-     - assets/tflite/yolo/model.tflite
-     - assets/tflite/yolo/label.txt
-     - assets/images/croppedImage.jpg
-     - assets/tflite/yolo/yolov2_tiny.tflite
-     - assets/lite-model_yolo-v5-tflite_tflite_model_1.tflite
-     - assets/tflite/yolov4-416-fp32.tflite
-     - assets/tflite/yolo/tiny_label.txt
+#  assets:
+#     - assets/tflite/yolo/model.tflite
+#     - assets/tflite/yolo/label.txt
+##     - assets/images/croppedImage.jpg
+##     - assets/images/kirar.jpg
+##     - assets/images/mesob.jpg
+##     - assets/images/jebenas.jpg
+##     - assets/tflite/yolo/yolov2_tiny.tflite
+##     - assets/lite-model_yolo-v5-tflite_tflite_model_1.tflite
+##     - assets/tflite/yolov4-416-fp32.tflite
+##     - assets/tflite/yolo/tiny_label.txt
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
